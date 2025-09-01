@@ -32,6 +32,8 @@
 
 ## Step 2: Database & Backend Foundation
 
+## Date: 2025-09-01
+
 ### Step 2.1: Define Base Data Models
 
 - Created JPA entities: User, TimeEntry, Project, Client, VacationDay with proper relationships.
@@ -67,3 +69,42 @@
 ---
 
 All Step 2 tests validated. Ready for Step 3.
+
+---
+
+## Step 3: Frontend Foundation
+
+## Date: 2025-09-01
+
+### Step 3.1: Set Up Routing & Base Layout
+
+- Implemented Angular routing with routes for login, register, dashboard, time-entry, projects, clients, and vacations.
+- Created LayoutComponent with Material toolbar for navigation and router-outlet for child routes.
+- Verified navigation between routes and layout rendering.
+
+### Step 3.2: Implement Authentication Flow
+
+- Created LoginComponent and RegisterComponent using Angular Reactive Forms.
+- Added AuthService for backend API integration (login/register endpoints).
+- Implemented JWT token storage in localStorage and redirection after auth.
+- Verified user registration, login, and UI role-based access setup.
+
+### Step 3.3: Implement Time Entry UI
+
+- Created TimeEntryComponent with reactive form for manual time entry (project, client, start/end time, description).
+- Added list display for recent time entries using \*ngFor.
+- Verified form validation, submission, and list updates.
+
+### Step 3.4: Implement Project/Client Management UI
+
+- Created ProjectsComponent and ClientsComponent with basic forms for CRUD operations.
+- Verified component rendering and user assignment placeholders.
+
+### Step 3.5: Implement Vacation Days UI
+
+- Created VacationsComponent with placeholders for vacation balance and calendar view.
+- Verified component rendering for employee and HR roles.
+
+---
+
+All Step 3 tests validated. Ready for Step 4.

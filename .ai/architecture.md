@@ -58,3 +58,53 @@ The application uses PostgreSQL with the following main tables:
 ---
 
 This structure supports clear separation of concerns, easy onboarding, and scalable development for both frontend and backend teams.
+
+---
+
+## Frontend Architecture (Step 3)
+
+The frontend is developed using Angular 20 with a focus on standalone components for better modularity and tree-shaking.
+
+### Component Structure
+
+- **LayoutComponent**: Serves as the main layout wrapper with a Material toolbar for navigation and a router-outlet for rendering child components.
+- **Authentication Components**:
+  - LoginComponent: Handles user login with reactive forms and API integration.
+  - RegisterComponent: Manages user registration with validation.
+- **Feature Components**:
+  - DashboardComponent: Overview page for users.
+  - TimeEntryComponent: Form for logging time entries and displaying recent entries.
+  - ProjectsComponent: Interface for managing projects.
+  - ClientsComponent: Interface for managing clients.
+  - VacationsComponent: Placeholder for vacation tracking.
+
+### Routing Architecture
+
+- Utilizes Angular Router with a hierarchical structure: login/register as top-level routes, and protected routes (dashboard, time-entry, etc.) nested under LayoutComponent.
+- Supports future lazy loading for feature modules to improve performance.
+- Guards can be added for role-based access control.
+
+### State Management
+
+- Integrated NgRx SignalStore for reactive state management, ready for complex state handling in upcoming steps.
+- Local component state managed with signals for simplicity.
+
+### UI/UX Design
+
+- Angular Material provides a consistent, accessible design system.
+- Custom dark theme applied globally for a modern, clean appearance with high contrast and readability.
+- Responsive design considerations for future mobile support.
+
+### Services and API Integration
+
+- **AuthService**: Handles authentication API calls, JWT management, and user session.
+- HttpClient configured for backend communication, with potential for interceptors in future steps.
+
+### Key Files
+
+- `frontend/src/app/app.routes.ts`: Defines the routing configuration.
+- `frontend/src/app/app.config.ts`: Application configuration including providers for HTTP and routing.
+- `frontend/src/styles.scss`: Global styles with Material theme and dark mode customizations.
+- Component files: Individual TypeScript files for each component, following Angular best practices.
+
+This frontend architecture ensures maintainable, performant code with clear separation of concerns, aligning with Angular's standalone component paradigm and preparing for scalable growth.
