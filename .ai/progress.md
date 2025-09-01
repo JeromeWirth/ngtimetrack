@@ -30,4 +30,40 @@
 
 ---
 
-All Step 1 tests validated. Ready for Step 2.
+## Step 2: Database & Backend Foundation
+
+### Step 2.1: Define Base Data Models
+
+- Created JPA entities: User, TimeEntry, Project, Client, VacationDay with proper relationships.
+- Added enums: Role, VacationType, VacationStatus.
+- Verified build successful and schema generation.
+
+### Step 2.2: Implement User Registration & Authentication (JWT)
+
+- Added JWT dependencies.
+- Created JwtUtils, AuthTokenFilter, SecurityConfig, UserDetailsServiceImpl.
+- Created AuthController with signup and login endpoints.
+- Configured Spring Security with JWT authentication.
+- Verified build successful.
+
+### Step 2.3: Implement Basic CRUD for TimeEntry
+
+- Created TimeEntryRepository and TimeEntryController.
+- Implemented authenticated CRUD operations for time entries.
+- Verified build successful.
+
+### Step 2.4: Implement Basic CRUD for Project/Client
+
+- Created ProjectRepository, ClientRepository, ProjectController, ClientController.
+- Implemented CRUD for projects and clients, with user assignment.
+- Verified build successful.
+
+### Step 2.5: Implement Vacation Days Management
+
+- Created VacationDayRepository and VacationDayController.
+- Implemented role-based access for vacation management.
+- Verified build successful.
+
+---
+
+All Step 2 tests validated. Ready for Step 3.
