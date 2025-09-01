@@ -15,11 +15,16 @@ export class TimeEntryService {
     return this.http.get<TimeEntry[]>(this.apiUrl);
   }
 
-  createTimeEntry(entry: Omit<TimeEntry, 'id' | 'userId'>): Observable<TimeEntry> {
+  createTimeEntry(
+    entry: Omit<TimeEntry, 'id' | 'userId'>
+  ): Observable<TimeEntry> {
     return this.http.post<TimeEntry>(this.apiUrl, entry);
   }
 
-  updateTimeEntry(id: number, entry: Partial<TimeEntry>): Observable<TimeEntry> {
+  updateTimeEntry(
+    id: number,
+    entry: Partial<TimeEntry>
+  ): Observable<TimeEntry> {
     return this.http.put<TimeEntry>(`${this.apiUrl}/${id}`, entry);
   }
 

@@ -37,7 +37,7 @@ import { AuthStore } from './stores/auth.store';
             <mat-label>Project</mat-label>
             <mat-select formControlName="projectId">
               @for (project of projectStore.projects(); track project.id) {
-                <mat-option [value]="project.id">{{ project.name }}</mat-option>
+              <mat-option [value]="project.id">{{ project.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -45,7 +45,7 @@ import { AuthStore } from './stores/auth.store';
             <mat-label>Client</mat-label>
             <mat-select formControlName="clientId">
               @for (client of projectStore.clients(); track client.id) {
-                <mat-option [value]="client.id">{{ client.name }}</mat-option>
+              <mat-option [value]="client.id">{{ client.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -75,9 +75,9 @@ import { AuthStore } from './stores/auth.store';
     <h2>Recent Entries</h2>
     <ul>
       @for (entry of timeEntryStore.entries(); track entry.id) {
-        <li>
-          {{ entry.description }} - {{ entry.startTime }} to {{ entry.endTime }}
-        </li>
+      <li>
+        {{ entry.description }} - {{ entry.startTime }} to {{ entry.endTime }}
+      </li>
       }
     </ul>
   `,
@@ -107,8 +107,12 @@ export class TimeEntryComponent implements OnInit {
 
   onSubmit() {
     const formValue = this.timeEntryForm.value;
-    const project = this.projectStore.projects().find(p => p.id === formValue.projectId);
-    const client = this.projectStore.clients().find(c => c.id === formValue.clientId);
+    const project = this.projectStore
+      .projects()
+      .find((p) => p.id === formValue.projectId);
+    const client = this.projectStore
+      .clients()
+      .find((c) => c.id === formValue.clientId);
     if (project && client) {
       const start = new Date(formValue.startTime);
       const end = new Date(formValue.endTime);

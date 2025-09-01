@@ -49,7 +49,7 @@ import { AuthStore } from './stores/auth.store';
         </form>
         <p>Already have an account? <a routerLink="/login">Login</a></p>
         @if (authStore.hasError()) {
-          <p style="color: red;">{{ authStore.error() }}</p>
+        <p style="color: red;">{{ authStore.error() }}</p>
         }
       </mat-card-content>
     </mat-card>
@@ -60,10 +60,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   authStore = inject(AuthStore);
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

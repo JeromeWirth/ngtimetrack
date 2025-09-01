@@ -39,7 +39,7 @@ import { ProjectStore } from './stores/project.store';
             <mat-label>Client</mat-label>
             <mat-select formControlName="clientId">
               @for (client of projectStore.clients(); track client.id) {
-                <mat-option [value]="client.id">{{ client.name }}</mat-option>
+              <mat-option [value]="client.id">{{ client.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -61,7 +61,7 @@ import { ProjectStore } from './stores/project.store';
     <h2>Projects List</h2>
     <ul>
       @for (project of projectStore.projects(); track project.id) {
-        <li>{{ project.name }}</li>
+      <li>{{ project.name }}</li>
       }
     </ul>
   `,
@@ -87,7 +87,9 @@ export class ProjectsComponent implements OnInit {
 
   onSubmit() {
     const formValue = this.projectForm.value;
-    const client = this.projectStore.clients().find(c => c.id === formValue.clientId);
+    const client = this.projectStore
+      .clients()
+      .find((c) => c.id === formValue.clientId);
     if (client) {
       const project = {
         name: formValue.name,

@@ -1,4 +1,10 @@
-import { signalStore, withState, withMethods, withComputed, patchState } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  withComputed,
+  patchState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { ProjectService } from '../project.service';
 import { Project, Client, ProjectState } from '../models/project';
@@ -21,7 +27,7 @@ export const ProjectStore = signalStore(
         tap((projects: Project[]) => {
           patchState(store, { projects, loading: false });
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of([]);
         })
@@ -36,7 +42,7 @@ export const ProjectStore = signalStore(
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -47,11 +53,13 @@ export const ProjectStore = signalStore(
       return projectService.updateProject(id, updates).pipe(
         tap((updatedProject: Project) => {
           patchState(store, (state) => ({
-            projects: state.projects.map(project => project.id === id ? updatedProject : project),
+            projects: state.projects.map((project) =>
+              project.id === id ? updatedProject : project
+            ),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -62,11 +70,11 @@ export const ProjectStore = signalStore(
       return projectService.deleteProject(id).pipe(
         tap(() => {
           patchState(store, (state) => ({
-            projects: state.projects.filter(project => project.id !== id),
+            projects: state.projects.filter((project) => project.id !== id),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -78,7 +86,7 @@ export const ProjectStore = signalStore(
         tap((clients: Client[]) => {
           patchState(store, { clients, loading: false });
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of([]);
         })
@@ -93,7 +101,7 @@ export const ProjectStore = signalStore(
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -104,11 +112,13 @@ export const ProjectStore = signalStore(
       return projectService.updateClient(id, updates).pipe(
         tap((updatedClient: Client) => {
           patchState(store, (state) => ({
-            clients: state.clients.map(client => client.id === id ? updatedClient : client),
+            clients: state.clients.map((client) =>
+              client.id === id ? updatedClient : client
+            ),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -119,11 +129,11 @@ export const ProjectStore = signalStore(
       return projectService.deleteClient(id).pipe(
         tap(() => {
           patchState(store, (state) => ({
-            clients: state.clients.filter(client => client.id !== id),
+            clients: state.clients.filter((client) => client.id !== id),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })

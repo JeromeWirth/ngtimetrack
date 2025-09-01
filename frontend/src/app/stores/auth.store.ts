@@ -1,4 +1,10 @@
-import { signalStore, withState, withMethods, withComputed, patchState } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  withComputed,
+  patchState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { User, AuthState } from '../models/user';
@@ -25,7 +31,7 @@ export const AuthStore = signalStore(
           localStorage.setItem('token', token);
           patchState(store, { user, token, loading: false });
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -37,7 +43,7 @@ export const AuthStore = signalStore(
         tap((response: any) => {
           patchState(store, { loading: false });
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })

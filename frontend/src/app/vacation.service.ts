@@ -15,11 +15,16 @@ export class VacationService {
     return this.http.get<VacationDay[]>(this.apiUrl);
   }
 
-  createVacationRequest(request: Omit<VacationDay, 'id' | 'status'>): Observable<VacationDay> {
+  createVacationRequest(
+    request: Omit<VacationDay, 'id' | 'status'>
+  ): Observable<VacationDay> {
     return this.http.post<VacationDay>(this.apiUrl, request);
   }
 
-  updateVacationRequest(id: number, updates: Partial<VacationDay>): Observable<VacationDay> {
+  updateVacationRequest(
+    id: number,
+    updates: Partial<VacationDay>
+  ): Observable<VacationDay> {
     return this.http.put<VacationDay>(`${this.apiUrl}/${id}`, updates);
   }
 

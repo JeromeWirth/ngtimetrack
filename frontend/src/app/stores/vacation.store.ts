@@ -1,4 +1,10 @@
-import { signalStore, withState, withMethods, withComputed, patchState } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  withComputed,
+  patchState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { VacationService } from '../vacation.service';
 import { VacationDay, VacationState } from '../models/vacation';
@@ -21,7 +27,7 @@ export const VacationStore = signalStore(
         tap((requests: VacationDay[]) => {
           patchState(store, { requests, loading: false });
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of([]);
         })
@@ -36,7 +42,7 @@ export const VacationStore = signalStore(
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -47,11 +53,13 @@ export const VacationStore = signalStore(
       return vacationService.updateVacationRequest(id, updates).pipe(
         tap((updatedRequest: VacationDay) => {
           patchState(store, (state) => ({
-            requests: state.requests.map(request => request.id === id ? updatedRequest : request),
+            requests: state.requests.map((request) =>
+              request.id === id ? updatedRequest : request
+            ),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -62,11 +70,11 @@ export const VacationStore = signalStore(
       return vacationService.deleteVacationRequest(id).pipe(
         tap(() => {
           patchState(store, (state) => ({
-            requests: state.requests.filter(request => request.id !== id),
+            requests: state.requests.filter((request) => request.id !== id),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -87,7 +95,8 @@ export const VacationStore = signalStore(
   })),
   withComputed((store) => ({
     totalRequests: () => store.requests().length,
-    approvedRequests: () => store.requests().filter(r => r.status === 'APPROVED').length,
+    approvedRequests: () =>
+      store.requests().filter((r) => r.status === 'APPROVED').length,
     isLoading: () => store.loading(),
     hasError: () => !!store.error(),
   }))

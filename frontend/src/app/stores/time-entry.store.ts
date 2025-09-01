@@ -1,4 +1,10 @@
-import { signalStore, withState, withMethods, withComputed, patchState } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  withComputed,
+  patchState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { TimeEntryService } from '../time-entry.service';
 import { TimeEntry, TimeEntryState } from '../models/time-entry';
@@ -20,7 +26,7 @@ export const TimeEntryStore = signalStore(
         tap((entries: TimeEntry[]) => {
           patchState(store, { entries, loading: false });
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of([]);
         })
@@ -35,7 +41,7 @@ export const TimeEntryStore = signalStore(
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -46,11 +52,13 @@ export const TimeEntryStore = signalStore(
       return timeEntryService.updateTimeEntry(id, updates).pipe(
         tap((updatedEntry: TimeEntry) => {
           patchState(store, (state) => ({
-            entries: state.entries.map(entry => entry.id === id ? updatedEntry : entry),
+            entries: state.entries.map((entry) =>
+              entry.id === id ? updatedEntry : entry
+            ),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
@@ -61,11 +69,11 @@ export const TimeEntryStore = signalStore(
       return timeEntryService.deleteTimeEntry(id).pipe(
         tap(() => {
           patchState(store, (state) => ({
-            entries: state.entries.filter(entry => entry.id !== id),
+            entries: state.entries.filter((entry) => entry.id !== id),
             loading: false,
           }));
         }),
-        catchError(error => {
+        catchError((error) => {
           patchState(store, { loading: false, error: error.message });
           return of(null);
         })
