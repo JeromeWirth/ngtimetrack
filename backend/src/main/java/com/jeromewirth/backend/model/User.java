@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 import com.jeromewirth.backend.model.VacationDay;
 import com.jeromewirth.backend.model.TimeEntry;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -16,7 +17,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password_hash", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -27,12 +28,15 @@ public class User {
     private Integer vacationBalance = 30; // Default 30 days
 
     @ManyToMany(mappedBy = "users")
+    @JsonIgnore
     private Set<Project> projects;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<TimeEntry> timeEntries;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<VacationDay> vacationDays;
 
     // Constructors

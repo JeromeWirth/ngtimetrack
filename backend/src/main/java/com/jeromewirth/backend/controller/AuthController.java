@@ -41,9 +41,13 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), Role.EMPLOYEE);
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        return ResponseEntity.ok("User registered successfully!");
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "User registered successfully!");
+        response.put("user", savedUser);
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
@@ -54,12 +58,13 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        User user = (User) authentication.getPrincipal();
-        String role = user.getRole().name();
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         Map<String, Object> response = new HashMap<>();
         response.put("token", jwt);
-        response.put("role", role);
+        response.put("user", user);
 
         return ResponseEntity.ok(response);
     }

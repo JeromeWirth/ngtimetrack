@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { AuthStore } from './stores/auth.store';
 
 @Component({
   selector: 'app-register',
@@ -42,12 +42,15 @@ import { AuthService } from './auth.service';
             mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="!registerForm.valid"
+            [disabled]="!registerForm.valid || authStore.isLoading()"
           >
             Register
           </button>
         </form>
         <p>Already have an account? <a routerLink="/login">Login</a></p>
+        @if (authStore.hasError()) {
+          <p style="color: red;">{{ authStore.error() }}</p>
+        }
       </mat-card-content>
     </mat-card>
   `,
@@ -55,10 +58,10 @@ import { AuthService } from './auth.service';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  authStore = inject(AuthStore);
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router
   ) {
     this.registerForm = this.fb.group({
@@ -68,13 +71,12 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    this.authService.register(this.registerForm.value).subscribe({
-      next: (response) => {
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/dashboard']);
+    this.authStore.register(this.registerForm.value).subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
       },
-      error: (error) => {
-        console.error('Register failed', error);
+      error: () => {
+        // Error handled in store
       },
     });
   }

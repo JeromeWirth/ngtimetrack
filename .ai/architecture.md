@@ -108,3 +108,82 @@ The frontend is developed using Angular 20 with a focus on standalone components
 - Component files: Individual TypeScript files for each component, following Angular best practices.
 
 This frontend architecture ensures maintainable, performant code with clear separation of concerns, aligning with Angular's standalone component paradigm and preparing for scalable growth.
+
+---
+
+## State Management & API Integration (Step 4)
+
+### NgRx SignalStore Architecture
+
+The application implements a robust state management system using NgRx SignalStore, providing reactive, type-safe state handling across the frontend.
+
+#### Store Structure
+
+- **AuthStore** (`stores/auth.store.ts`): Manages authentication state including user data, JWT token, loading states, and error handling.
+- **TimeEntryStore** (`stores/time-entry.store.ts`): Handles time entry CRUD operations with reactive list updates.
+- **ProjectStore** (`stores/project.store.ts`): Manages projects and clients with shared state for efficient data access.
+- **VacationStore** (`stores/vacation.store.ts`): Controls vacation request management with role-based access.
+
+#### Key Features
+
+- **Reactive State**: All stores use signals for reactive updates, ensuring UI components automatically reflect state changes.
+- **Type Safety**: Full TypeScript integration with proper interfaces for all state objects.
+- **Error Handling**: Centralized error management with user-friendly error messages.
+- **Loading States**: Consistent loading indicators across all operations.
+- **Computed Signals**: Derived state calculations for efficient data transformations.
+
+### API Integration Layer
+
+#### Service Architecture
+
+- **AuthService**: Handles authentication endpoints with JWT token management.
+- **TimeEntryService**: Provides CRUD operations for time tracking with proper error handling.
+- **ProjectService**: Manages project and client data with relationship handling.
+- **VacationService**: Supports vacation request operations with role-based permissions.
+
+#### HTTP Interceptor
+
+- **AuthInterceptor** (`auth.interceptor.ts`): Automatically attaches JWT tokens to authenticated requests.
+- Configured in `app.config.ts` for global application coverage.
+- Handles token injection transparently across all API calls.
+
+#### Data Flow
+
+1. **User Interaction** → Component dispatches action to store
+2. **Store** → Calls service method with reactive observables
+3. **Service** → Makes HTTP request with interceptor adding auth headers
+4. **Backend** → Processes request and returns data
+5. **Service** → Returns observable with response/error
+6. **Store** → Updates state reactively
+7. **Component** → Automatically re-renders with new state
+
+### Security & Authentication
+
+#### JWT Integration
+
+- Tokens stored securely in localStorage
+- Automatic token attachment via HTTP interceptor
+- Role-based UI rendering based on user permissions
+- Secure logout with token cleanup
+
+#### Error Handling
+
+- Network errors gracefully handled with user feedback
+- Authentication errors trigger appropriate redirects
+- Validation errors displayed inline with forms
+
+### Performance Optimizations
+
+- **Lazy Loading**: Stores loaded on-demand to reduce initial bundle size
+- **Reactive Updates**: Only affected components re-render on state changes
+- **Efficient Queries**: Backend relationships optimized to prevent N+1 queries
+- **Caching**: Local state caching reduces unnecessary API calls
+
+### Testing Strategy
+
+- **Unit Tests**: Individual store methods tested with mock services
+- **Integration Tests**: Full API flows tested end-to-end
+- **State Validation**: Store state verified after each operation
+- **Error Scenarios**: Comprehensive error handling validation
+
+This architecture provides a solid foundation for scalable state management and reliable API integration, ensuring the application remains maintainable and performant as features grow.

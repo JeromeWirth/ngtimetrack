@@ -108,3 +108,32 @@ All Step 2 tests validated. Ready for Step 3.
 ---
 
 All Step 3 tests validated. Ready for Step 4.
+
+---
+
+## Step 4: State Management & API Integration
+
+## Date: 2025-09-01
+
+### Step 4.1: Set Up NgRx SignalStore for User, TimeEntry, Project, Vacation State
+
+- Created `auth.store.ts` for authentication state management (login, register, logout, token handling).
+- Created `time-entry.store.ts` for time entry CRUD operations.
+- Created `project.store.ts` for project and client management.
+- Created `vacation.store.ts` for vacation request management.
+- All stores use NgRx SignalStore with reactive state updates, loading states, and error handling.
+- Verified state updates by dispatching actions and checking store state.
+
+### Step 4.2: Connect UI to Backend APIs
+
+- Updated `login.component.ts` and `register.component.ts` to use `AuthStore` for authentication flows.
+- Updated `time-entry.component.ts` to use `TimeEntryStore` and `ProjectStore` for creating and listing time entries, connected to backend APIs.
+- Updated `projects.component.ts` to use `ProjectStore` for project CRUD operations.
+- Added HTTP interceptor (`auth.interceptor.ts`) to automatically include JWT tokens in API requests.
+- Configured the interceptor in `app.config.ts`.
+- Adjusted models and services to match backend expectations (e.g., sending full `Project` and `Client` objects).
+- Verified CRUD operations from the UI update the database correctly.
+
+---
+
+All Step 4 tests validated. Ready for Step 5.
