@@ -29,6 +29,11 @@ jobs:
     defaults:
       run:
         working-directory: backend
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
+      SPRING_SECURITY_USER_NAME: ${{ secrets.SPRING_SECURITY_USER_NAME }}
+      SPRING_SECURITY_USER_PASSWORD: ${{ secrets.SPRING_SECURITY_USER_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
