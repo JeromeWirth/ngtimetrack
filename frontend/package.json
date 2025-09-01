@@ -1,5 +1,5 @@
 {
-  "name": "ngtimetrack",
+  "name": "frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,12 +20,15 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.1",
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
     "@angular/forms": "^20.1.0",
+    "@angular/material": "^20.2.1",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "@ngrx/signals": "^20.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

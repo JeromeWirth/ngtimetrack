@@ -1,59 +1,106 @@
-# Ngtimetrack
+# NgTimeTrack
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+A modern web-based time tracking application for teams, built with Angular 20 (frontend) and Spring Boot (backend). This monorepo contains both frontend and backend code, as well as AI project documentation and planning in the `.ai` folder.
 
-## Development server
+---
 
-To start a local development server, run:
+## Project Structure
 
-```bash
-ng serve
+```
+ngtimetrack/
+│
+├── frontend/         # Angular 20 app (UI)
+├── backend/          # Spring Boot app (API & DB)
+├── .ai/              # AI-generated docs, plans, and requirements
+├── README.md         # Project overview and instructions
+└── ...               # Other root files (e.g., .gitignore, package.json)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
+- Node.js (for frontend)
+- Java 17+ (for backend)
+- PostgreSQL (or compatible DB)
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/your-org/ngtimetrack.git
+cd ngtimetrack
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 2. Frontend Setup
 
-```bash
-ng generate --help
+```sh
+cd frontend
+npm install
+npm start
 ```
 
-## Building
+- Runs Angular app at `http://localhost:4200`
 
-To build the project run:
+### 3. Backend Setup
 
-```bash
-ng build
+```sh
+cd ../backend
+# Configure DB connection in application.properties
+./gradlew bootRun  # or ./mvnw spring-boot:run
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Runs Spring Boot API at `http://localhost:8080`
+- Swagger UI available at `/swagger-ui.html`
 
-## Running unit tests
+### 4. AI Documentation
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- See `.ai/` for product requirements, tech stack, and implementation plans.
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## Features (Base Version)
 
-For end-to-end (e2e) testing, run:
+- User authentication (email/password)
+- Roles: Employee, HR, Admin
+- Time entry (manual & timer-based)
+- Project & client management
+- Vacation day tracking (30/year per employee)
+- Personal dashboard (employee)
+- HR dashboard (report status, vacation overview)
+- API documentation (Swagger)
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Testing
 
-## Additional Resources
+- Frontend: `npm test` (from `frontend/`)
+- Backend: `./gradlew test` or `./mvnw test` (from `backend/`)
+- Minimum 70% code coverage required
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Contributing
+
+1. Fork the repo and create a feature branch
+2. Make your changes and add tests
+3. Open a pull request with a clear description
+
+---
+
+## License
+
+MIT (or your chosen license)
+
+---
+
+## Credits
+
+- Angular, Spring Boot, PostgreSQL, NgRx, and all open-source contributors
+
+---
+
+## Contact
+
+For questions or support, open an issue or contact the maintainers.
