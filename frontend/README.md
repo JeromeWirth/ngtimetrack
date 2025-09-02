@@ -1,59 +1,79 @@
-# Frontend
+# NgTimeTrack Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+This is the Angular 20 frontend for NgTimeTrack, a modern web-based time tracking application.
 
-## Development server
+## Prerequisites
 
-To start a local development server, run:
+- Node.js 18+ and npm
+- Backend server running (see backend README)
 
-```bash
-ng serve
-```
+## Setup
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. Install dependencies:
 
-## Code scaffolding
+   ```bash
+   npm install
+   ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+2. Start the development server:
 
-```bash
-ng generate component component-name
-```
+   ```bash
+   npm start
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+   The app will be available at `http://localhost:4200`.
 
 ## Building
 
-To build the project run:
+To build the project for production:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Testing
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Run unit tests with Vitest:
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+For end-to-end tests (if configured):
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Code Scaffolding
 
-## Additional Resources
+Generate new components, services, etc.:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+ng generate component component-name
+```
+
+For a complete list of schematics:
+
+```bash
+ng generate --help
+```
+
+## Features
+
+- User authentication (login/register)
+- Time entry management (manual and timer-based)
+- Project and client management
+- Vacation tracking
+- Role-based dashboards (Employee, HR, Admin)
+- Responsive UI with Angular Material
+
+## Tech Stack
+
+- Angular 20
+- NgRx SignalStore for state management
+- Angular Material for UI components
+- RxJS for reactive programming
+- Vitest for testing
