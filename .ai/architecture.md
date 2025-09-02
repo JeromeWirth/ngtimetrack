@@ -241,6 +241,7 @@ The testing architecture evolved significantly during Step 6 to address Angular 
 ### Backend Testing Architecture
 
 #### Test Framework Stack
+
 - **JUnit 5**: Modern testing framework with Jupiter extensions
 - **Spring Boot Test**: Integration testing support with `@SpringBootTest`
 - **MockMvc**: HTTP endpoint testing without full server startup
@@ -248,12 +249,14 @@ The testing architecture evolved significantly during Step 6 to address Angular 
 - **H2 Database**: In-memory database for isolated test environments
 
 #### Test Categories
+
 - **Repository Tests**: Data access layer validation with `@DataJpaTest`
 - **Controller Tests**: API endpoint testing with MockMvc and security validation
 - **Integration Tests**: Full application context testing with `@SpringBootTest`
 - **Security Tests**: JWT authentication and role-based access control
 
 #### Key Testing Patterns
+
 - **Test Data Builders**: Consistent test data creation using builder patterns
 - **Mock Authentication**: Custom test utilities for JWT token simulation
 - **Database Isolation**: Each test method runs in isolation with clean database state
@@ -264,31 +267,35 @@ The testing architecture evolved significantly during Step 6 to address Angular 
 #### Framework Migration: Karma → Vitest
 
 **Migration Decision**: Angular 20's zoneless change detection introduced Zone.js compatibility issues with Karma, causing persistent NG0908 errors. Vitest was selected for its:
+
 - Better Angular 20 support and modern JavaScript compatibility
 - Faster execution and improved developer experience
 - Native ESM support and TypeScript integration
 - Reduced configuration complexity
 
 #### Test Framework Stack
+
 - **Vitest**: Modern testing framework with native Angular support
 - **@analogjs/vite-plugin-angular**: Angular compilation in test environment
 - **jsdom**: DOM simulation for component testing
 - **@angular-builders/vitest**: Integration with Angular CLI (though not used in final setup)
 
 #### Test Configuration
+
 ```typescript
 // vitest.config.ts
 export default defineConfig({
   plugins: [angular()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test-setup.ts']
-  }
+    environment: "jsdom",
+    setupFiles: ["./src/test-setup.ts"],
+  },
 });
 ```
 
 #### Test Categories
+
 - **Service Tests**: API integration with HttpClientTestingModule
 - **Store Tests**: NgRx SignalStore state management validation
 - **Component Tests**: UI component testing with TestBed and RouterTestingModule
@@ -297,18 +304,21 @@ export default defineConfig({
 ### Testing Strategy & Best Practices
 
 #### Async Testing Patterns
+
 - **Promise-based**: Converted from deprecated `done()` callbacks to async/await
 - **Error Handling**: Comprehensive error scenario testing with try/catch blocks
 - **Observable Testing**: Proper subscription handling and cleanup
 - **Mock Setup**: Vitest `vi.fn()` for modern mocking capabilities
 
 #### Test Data Management
+
 - **Consistent Fixtures**: Reusable test data across test suites
 - **Factory Functions**: Dynamic test data generation
 - **Mock Services**: Isolated testing of business logic
 - **State Validation**: Comprehensive store state verification
 
 #### CI/CD Integration
+
 - **GitHub Actions**: Automated test execution on every push/PR
 - **Parallel Execution**: Frontend and backend tests run concurrently
 - **Coverage Reporting**: Automated coverage analysis and reporting
@@ -317,12 +327,14 @@ export default defineConfig({
 ### Performance & Reliability
 
 #### Test Execution Performance
+
 - **Vitest Speed**: ~1.45s for all 16 tests (vs ~3-4s with Karma)
 - **Parallel Test Runs**: Concurrent test execution in CI/CD
 - **Selective Testing**: Ability to run specific test suites
 - **Fast Feedback**: Quick iteration during development
 
 #### Test Reliability
+
 - **Database Isolation**: H2 ensures clean test environments
 - **Mock Stability**: Consistent mock behavior across test runs
 - **Flaky Test Prevention**: Proper async handling and cleanup
@@ -331,12 +343,14 @@ export default defineConfig({
 ### Security Testing
 
 #### Authentication Testing
+
 - **JWT Token Validation**: Proper token handling and expiration
 - **Role-based Access**: Security annotation verification
 - **Unauthorized Access**: Proper rejection of invalid requests
 - **Session Management**: Token storage and cleanup validation
 
 #### API Security Testing
+
 - **Input Validation**: Malformed request handling
 - **SQL Injection Prevention**: Parameterized query validation
 - **XSS Protection**: Input sanitization verification
@@ -345,12 +359,14 @@ export default defineConfig({
 ### Future Testing Enhancements
 
 #### Planned Improvements
+
 - **E2E Testing**: Cypress or Playwright for user journey testing
 - **Performance Testing**: Load testing for API endpoints
 - **Visual Regression**: Component appearance validation
 - **Accessibility Testing**: WCAG compliance verification
 
 #### Test Maintenance
+
 - **Test Documentation**: Comprehensive test case documentation
 - **Flaky Test Monitoring**: Automated detection and resolution
 - **Coverage Trends**: Historical coverage analysis

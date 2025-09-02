@@ -176,7 +176,7 @@ All Step 5 tests validated. Ready for Step 6.
 
 - **Initial Challenges**: Encountered Zone.js/Karma conflicts with Angular 20's zoneless change detection, causing NG0908 errors.
 - **Framework Migration**: Successfully migrated from Karma to Vitest for better Angular 20 compatibility.
-- **Test Configuration**: 
+- **Test Configuration**:
   - Created `vitest.config.ts` with Angular plugin support
   - Updated `test-setup.ts` for Vitest compatibility
   - Modified package.json scripts for Vitest execution
@@ -198,13 +198,15 @@ All Step 5 tests validated. Ready for Step 6.
 
 ### Step 6.4: Testing Architecture Insights
 
-- **Backend Testing Strategy**: 
+- **Backend Testing Strategy**:
+
   - Unit tests for repositories and services
   - Integration tests for controllers with MockMvc
   - Security-focused tests for authentication flows
   - Database isolation using H2 for reliable test execution
 
 - **Frontend Testing Strategy**:
+
   - Component tests with TestBed and RouterTestingModule
   - Service tests with HttpClientTestingModule
   - Store tests with reactive state validation
