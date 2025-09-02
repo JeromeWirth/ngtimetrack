@@ -137,3 +137,22 @@ All Step 3 tests validated. Ready for Step 4.
 ---
 
 All Step 4 tests validated. Ready for Step 5.
+
+---
+
+## Step 5: Basic Dashboard
+
+## Date: 2025-09-02
+
+### Step 5.1: Implement Dashboard View
+
+- Employees: Implemented dashboard showing summary of total hours tracked (calculated from time entry durations), recent time entries (last 5), and vacation balance (from user profile).
+- HR: Implemented dashboard showing overview of all employees with report status for the current month ("Reported" or "Not Reported" based on time entries in the month).
+- Added sample data loader (`DataLoader.java`) to insert test users, clients, projects, time entries, and vacation days on application startup.
+- Updated time entry form with pre-selected date (today), separate date picker, and time inputs for better usability.
+- Enhanced clients component with form to add new clients and list existing ones.
+- Verified dashboard updates with time entry logging and HR report status visibility.
+
+---
+
+All Step 5 tests validated. Ready for Step 6.

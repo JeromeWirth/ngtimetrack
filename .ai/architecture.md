@@ -187,3 +187,47 @@ The application implements a robust state management system using NgRx SignalSto
 - **Error Scenarios**: Comprehensive error handling validation
 
 This architecture provides a solid foundation for scalable state management and reliable API integration, ensuring the application remains maintainable and performant as features grow.
+
+---
+
+## Dashboard Implementation (Step 5)
+
+### Overview
+
+The dashboard serves as the central hub for users, providing personalized insights based on roles. It leverages reactive state management and computed signals for efficient data presentation.
+
+### Employee Dashboard
+
+- **Total Hours Calculation**: Uses a computed signal in `TimeEntryStore` to sum durations from all time entries, converting minutes to hours for display.
+- **Recent Entries**: Displays the last 5 time entries using array slicing and reverse ordering.
+- **Vacation Balance**: Retrieved from the authenticated user's profile in `AuthStore`.
+- **Reactive Updates**: Dashboard automatically updates when new time entries are added via the store's reactive state.
+
+### HR Dashboard
+
+- **Employee Overview**: Fetches all users via `UserStore` and all time entries via `TimeEntryStore` (HR-only endpoint).
+- **Report Status Logic**: Computed in the component by checking if each user has time entries in the current month. Uses date filtering on `startTime`.
+- **Role-Based Rendering**: Conditionally displays HR view if user role is 'HR' or 'ADMIN'.
+- **Performance Considerations**: For larger datasets, consider server-side aggregation to avoid loading all entries client-side.
+
+### Data Loading Strategy
+
+- **Sample Data**: `DataLoader` component inserts test data on startup if database is empty, ensuring consistent testing environment.
+- **Lazy Loading**: Stores load data on component initialization, with loading states for better UX.
+- **Error Handling**: Centralized in stores with user-friendly error messages.
+
+### UI Enhancements
+
+- **Form Improvements**: Time entry form uses separate date picker and time inputs for better usability, with date pre-selected to today.
+- **Client Management**: Clients component allows adding new clients, integrated with `ProjectStore` for state management.
+- **Material Design**: Consistent use of Angular Material components for accessibility and modern UI.
+
+### Security & Access Control
+
+- **Endpoint Protection**: HR endpoints use `@PreAuthorize` with role checks.
+- **Data Filtering**: Client-side filtering ensures users only see authorized data.
+- **JWT Integration**: Automatic token inclusion via HTTP interceptor.
+
+This dashboard architecture provides a scalable, user-friendly interface that adapts to different roles while maintaining performance and security. Future enhancements could include charts, export features, and real-time updates.
+
+---

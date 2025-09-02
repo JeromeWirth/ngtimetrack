@@ -4,6 +4,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -23,6 +25,8 @@ import { AuthStore } from './stores/auth.store';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
   ],
   template: `
@@ -50,12 +54,21 @@ import { AuthStore } from './stores/auth.store';
             </mat-select>
           </mat-form-field>
           <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
             <mat-label>Start Time</mat-label>
-            <input matInput formControlName="startTime" type="datetime-local" />
+            <input matInput type="time" formControlName="startTime" />
           </mat-form-field>
           <mat-form-field>
             <mat-label>End Time</mat-label>
-            <input matInput formControlName="endTime" type="datetime-local" />
+            <input matInput type="time" formControlName="endTime" />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Description</mat-label>
@@ -93,6 +106,7 @@ export class TimeEntryComponent implements OnInit {
     this.timeEntryForm = this.fb.group({
       projectId: ['', Validators.required],
       clientId: ['', Validators.required],
+      date: [new Date(), Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       description: ['', Validators.required],
@@ -114,19 +128,31 @@ export class TimeEntryComponent implements OnInit {
       .clients()
       .find((c) => c.id === formValue.clientId);
     if (project && client) {
-      const start = new Date(formValue.startTime);
-      const end = new Date(formValue.endTime);
+      const date = formValue.date;
+      const startTimeStr = `${date.getFullYear()}-${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}T${
+        formValue.startTime
+      }:00`;
+      const endTimeStr = `${date.getFullYear()}-${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}T${
+        formValue.endTime
+      }:00`;
+      const start = new Date(startTimeStr);
+      const end = new Date(endTimeStr);
       const duration = (end.getTime() - start.getTime()) / (1000 * 60); // minutes
       const entry = {
         project,
         client,
-        startTime: formValue.startTime,
-        endTime: formValue.endTime,
+        startTime: startTimeStr,
+        endTime: endTimeStr,
         duration,
         description: formValue.description,
       };
       this.timeEntryStore.addTimeEntry(entry).subscribe(() => {
         this.timeEntryForm.reset();
+        this.timeEntryForm.patchValue({ date: new Date() }); // reset date to today
       });
     }
   }
