@@ -32,6 +32,18 @@ export const TimeEntryStore = signalStore(
         })
       );
     },
+    loadAllTimeEntries() {
+      patchState(store, { loading: true, error: null });
+      return timeEntryService.getAllTimeEntries().pipe(
+        tap((entries: TimeEntry[]) => {
+          patchState(store, { entries, loading: false });
+        }),
+        catchError((error) => {
+          patchState(store, { loading: false, error: error.message });
+          return of([]);
+        })
+      );
+    },
     addTimeEntry(entry: Omit<TimeEntry, 'id' | 'userId'>) {
       patchState(store, { loading: true, error: null });
       return timeEntryService.createTimeEntry(entry).pipe(

@@ -6,6 +6,7 @@ import com.jeromewirth.backend.repository.TimeEntryRepository;
 import com.jeromewirth.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -30,6 +31,13 @@ public class TimeEntryController {
             return ResponseEntity.badRequest().build();
         }
         List<TimeEntry> entries = timeEntryRepository.findByUser(userOpt.get());
+        return ResponseEntity.ok(entries);
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('HR') or hasRole('ADMIN')")
+    public ResponseEntity<List<TimeEntry>> getAllTimeEntriesForHR() {
+        List<TimeEntry> entries = timeEntryRepository.findAll();
         return ResponseEntity.ok(entries);
     }
 

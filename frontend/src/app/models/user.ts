@@ -11,3 +11,9 @@ export interface AuthState {
   loading: boolean;
   error: string | null;
 }
+
+export interface UserState {
+  users: User[];
+  loading: boolean;
+  error: string | null;
+}

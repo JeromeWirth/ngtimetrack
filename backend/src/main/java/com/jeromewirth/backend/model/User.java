@@ -2,6 +2,7 @@ package com.jeromewirth.backend.model;
 
 import jakarta.persistence.*;
 import java.util.Set;
+import java.util.HashSet;
 import com.jeromewirth.backend.model.VacationDay;
 import com.jeromewirth.backend.model.TimeEntry;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,9 +42,13 @@ public class User {
 
     // Constructors
     public User() {
+        this.projects = new HashSet<>();
+        this.timeEntries = new HashSet<>();
+        this.vacationDays = new HashSet<>();
     }
 
     public User(String email, String password, Role role) {
+        this();
         this.email = email;
         this.password = password;
         this.role = role;

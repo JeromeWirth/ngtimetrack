@@ -15,6 +15,10 @@ export class TimeEntryService {
     return this.http.get<TimeEntry[]>(this.apiUrl);
   }
 
+  getAllTimeEntries(): Observable<TimeEntry[]> {
+    return this.http.get<TimeEntry[]>(`${this.apiUrl}/all`);
+  }
+
   createTimeEntry(
     entry: Omit<TimeEntry, 'id' | 'userId'>
   ): Observable<TimeEntry> {
