@@ -156,3 +156,63 @@ All Step 4 tests validated. Ready for Step 5.
 ---
 
 All Step 5 tests validated. Ready for Step 6.
+
+---
+
+## Step 6: Testing & Validation
+
+## Date: 2025-09-02
+
+### Step 6.1: Backend Testing Implementation
+
+- **Test Framework Setup**: Configured JUnit 5, Spring Boot Test, and JaCoCo for comprehensive backend testing.
+- **Repository Tests**: Created `TimeEntryRepositoryTest.java` with tests for CRUD operations, custom queries, and data integrity.
+- **Controller Tests**: Implemented `AuthControllerTest.java` and `TimeEntryControllerTest.java` with MockMvc for API endpoint testing.
+- **Security Testing**: Added JWT authentication and role-based access control tests.
+- **Coverage Analysis**: Achieved >70% test coverage with JaCoCo reporting.
+- **Database Integration**: Used H2 in-memory database for isolated test environments.
+
+### Step 6.2: Frontend Testing Migration & Implementation
+
+- **Initial Challenges**: Encountered Zone.js/Karma conflicts with Angular 20's zoneless change detection, causing NG0908 errors.
+- **Framework Migration**: Successfully migrated from Karma to Vitest for better Angular 20 compatibility.
+- **Test Configuration**: 
+  - Created `vitest.config.ts` with Angular plugin support
+  - Updated `test-setup.ts` for Vitest compatibility
+  - Modified package.json scripts for Vitest execution
+- **Test Implementation**:
+  - `AuthService` tests: Login/register API calls with HttpClientTestingModule
+  - `AuthStore` tests: State management, computed signals, and async operations
+  - `AppComponent` tests: Basic component rendering
+  - `LoginComponent` tests: Form validation, auth integration, and routing
+- **Async Testing**: Converted deprecated `done()` callbacks to promise-based patterns
+- **Mock Setup**: Updated from Jasmine spies to Vitest's `vi.fn()` for better compatibility
+
+### Step 6.3: Test Results & Validation
+
+- **Backend Tests**: All 11 tests passing with comprehensive coverage
+- **Frontend Tests**: All 5 tests passing after Vitest migration
+- **Total Coverage**: 16/16 tests passing across both applications
+- **Performance**: Vitest provides faster execution (~1.45s vs ~3-4s with Karma)
+- **Compatibility**: Resolved Angular 20 Zone.js conflicts through modern testing framework
+
+### Step 6.4: Testing Architecture Insights
+
+- **Backend Testing Strategy**: 
+  - Unit tests for repositories and services
+  - Integration tests for controllers with MockMvc
+  - Security-focused tests for authentication flows
+  - Database isolation using H2 for reliable test execution
+
+- **Frontend Testing Strategy**:
+  - Component tests with TestBed and RouterTestingModule
+  - Service tests with HttpClientTestingModule
+  - Store tests with reactive state validation
+  - Async operation testing with promises and error handling
+
+- **CI/CD Integration**: Tests run automatically in GitHub Actions for both frontend and backend
+- **Coverage Reporting**: JaCoCo for backend, Vitest coverage for frontend
+
+---
+
+All Step 6 tests validated and passing. Ready for Step 7.

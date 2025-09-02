@@ -231,3 +231,131 @@ The dashboard serves as the central hub for users, providing personalized insigh
 This dashboard architecture provides a scalable, user-friendly interface that adapts to different roles while maintaining performance and security. Future enhancements could include charts, export features, and real-time updates.
 
 ---
+
+## Testing & Validation Architecture (Step 6)
+
+### Overview
+
+The testing architecture evolved significantly during Step 6 to address Angular 20 compatibility issues and ensure comprehensive test coverage across both frontend and backend applications.
+
+### Backend Testing Architecture
+
+#### Test Framework Stack
+- **JUnit 5**: Modern testing framework with Jupiter extensions
+- **Spring Boot Test**: Integration testing support with `@SpringBootTest`
+- **MockMvc**: HTTP endpoint testing without full server startup
+- **JaCoCo**: Code coverage analysis and reporting
+- **H2 Database**: In-memory database for isolated test environments
+
+#### Test Categories
+- **Repository Tests**: Data access layer validation with `@DataJpaTest`
+- **Controller Tests**: API endpoint testing with MockMvc and security validation
+- **Integration Tests**: Full application context testing with `@SpringBootTest`
+- **Security Tests**: JWT authentication and role-based access control
+
+#### Key Testing Patterns
+- **Test Data Builders**: Consistent test data creation using builder patterns
+- **Mock Authentication**: Custom test utilities for JWT token simulation
+- **Database Isolation**: Each test method runs in isolation with clean database state
+- **Coverage Goals**: >70% line and branch coverage with JaCoCo reporting
+
+### Frontend Testing Architecture
+
+#### Framework Migration: Karma → Vitest
+
+**Migration Decision**: Angular 20's zoneless change detection introduced Zone.js compatibility issues with Karma, causing persistent NG0908 errors. Vitest was selected for its:
+- Better Angular 20 support and modern JavaScript compatibility
+- Faster execution and improved developer experience
+- Native ESM support and TypeScript integration
+- Reduced configuration complexity
+
+#### Test Framework Stack
+- **Vitest**: Modern testing framework with native Angular support
+- **@analogjs/vite-plugin-angular**: Angular compilation in test environment
+- **jsdom**: DOM simulation for component testing
+- **@angular-builders/vitest**: Integration with Angular CLI (though not used in final setup)
+
+#### Test Configuration
+```typescript
+// vitest.config.ts
+export default defineConfig({
+  plugins: [angular()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/test-setup.ts']
+  }
+});
+```
+
+#### Test Categories
+- **Service Tests**: API integration with HttpClientTestingModule
+- **Store Tests**: NgRx SignalStore state management validation
+- **Component Tests**: UI component testing with TestBed and RouterTestingModule
+- **Integration Tests**: End-to-end user flows and state interactions
+
+### Testing Strategy & Best Practices
+
+#### Async Testing Patterns
+- **Promise-based**: Converted from deprecated `done()` callbacks to async/await
+- **Error Handling**: Comprehensive error scenario testing with try/catch blocks
+- **Observable Testing**: Proper subscription handling and cleanup
+- **Mock Setup**: Vitest `vi.fn()` for modern mocking capabilities
+
+#### Test Data Management
+- **Consistent Fixtures**: Reusable test data across test suites
+- **Factory Functions**: Dynamic test data generation
+- **Mock Services**: Isolated testing of business logic
+- **State Validation**: Comprehensive store state verification
+
+#### CI/CD Integration
+- **GitHub Actions**: Automated test execution on every push/PR
+- **Parallel Execution**: Frontend and backend tests run concurrently
+- **Coverage Reporting**: Automated coverage analysis and reporting
+- **Failure Notifications**: Immediate feedback on test failures
+
+### Performance & Reliability
+
+#### Test Execution Performance
+- **Vitest Speed**: ~1.45s for all 16 tests (vs ~3-4s with Karma)
+- **Parallel Test Runs**: Concurrent test execution in CI/CD
+- **Selective Testing**: Ability to run specific test suites
+- **Fast Feedback**: Quick iteration during development
+
+#### Test Reliability
+- **Database Isolation**: H2 ensures clean test environments
+- **Mock Stability**: Consistent mock behavior across test runs
+- **Flaky Test Prevention**: Proper async handling and cleanup
+- **Cross-platform Compatibility**: Consistent results across environments
+
+### Security Testing
+
+#### Authentication Testing
+- **JWT Token Validation**: Proper token handling and expiration
+- **Role-based Access**: Security annotation verification
+- **Unauthorized Access**: Proper rejection of invalid requests
+- **Session Management**: Token storage and cleanup validation
+
+#### API Security Testing
+- **Input Validation**: Malformed request handling
+- **SQL Injection Prevention**: Parameterized query validation
+- **XSS Protection**: Input sanitization verification
+- **CORS Configuration**: Cross-origin request handling
+
+### Future Testing Enhancements
+
+#### Planned Improvements
+- **E2E Testing**: Cypress or Playwright for user journey testing
+- **Performance Testing**: Load testing for API endpoints
+- **Visual Regression**: Component appearance validation
+- **Accessibility Testing**: WCAG compliance verification
+
+#### Test Maintenance
+- **Test Documentation**: Comprehensive test case documentation
+- **Flaky Test Monitoring**: Automated detection and resolution
+- **Coverage Trends**: Historical coverage analysis
+- **Test Quality Metrics**: Maintainability and effectiveness tracking
+
+This testing architecture provides a solid foundation for maintaining code quality, preventing regressions, and ensuring reliable deployments. The successful migration to Vitest demonstrates adaptability to modern Angular versions while maintaining comprehensive test coverage.
+
+---

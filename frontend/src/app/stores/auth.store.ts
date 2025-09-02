@@ -26,8 +26,7 @@ export const AuthStore = signalStore(
       return authService.login(credentials).pipe(
         tap((response: any) => {
           const token = response.token;
-          const role = response.role;
-          const user = { role } as User;
+          const user = response.user;
           localStorage.setItem('token', token);
           patchState(store, { user, token, loading: false });
         }),
