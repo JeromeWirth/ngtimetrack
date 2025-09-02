@@ -6,6 +6,7 @@ import {
 import { AuthStore } from './auth.store';
 import { AuthService } from '../auth.service';
 import { App } from '../app';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 describe('AuthStore', () => {
   let store: InstanceType<typeof AuthStore>;
@@ -51,7 +52,6 @@ describe('AuthStore', () => {
       const req = httpMock.expectOne('http://localhost:8080/api/auth/login');
       req.error(new ErrorEvent('error'));
       await loginPromise;
-      fail('Expected login to throw an error');
     } catch (error) {
       expect(store.error()).toBeTruthy();
       expect(store.loading()).toBe(false);

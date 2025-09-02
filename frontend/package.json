@@ -27,7 +27,6 @@
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
-    "@angular/platform-browser-dynamic": "^20.1.0",
     "@angular/forms": "^20.1.0",
     "@angular/material": "^20.2.1",
     "@angular/platform-browser": "^20.1.0",
@@ -43,7 +42,6 @@
     "@vitest/ui": "^3.2.4",
     "jsdom": "^26.1.0",
     "typescript": "~5.8.2",
-    "vitest": "^3.2.4",
-    "zone.js": "^0.15.1"
+    "vitest": "^3.2.4"
   }
 }
