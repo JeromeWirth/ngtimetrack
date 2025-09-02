@@ -30,7 +30,7 @@
 
 ## Other
 
-- **Testing:** JUnit (backend), Jasmine/Karma (frontend)
+- **Testing:** JUnit (backend), Vitest (frontend)
 - **Documentation:** OpenAPI/Swagger (backend API), Storybook (optional, for UI components)
 - **Email:** Spring Boot Mail or SendGrid API
 
