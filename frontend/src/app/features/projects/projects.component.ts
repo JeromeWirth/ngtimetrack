@@ -10,7 +10,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ProjectStore } from './stores/project.store';
+import { ProjectStore } from '../../shared/stores/project.store';
 
 @Component({
   selector: 'app-projects',

@@ -10,10 +10,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthStore } from './stores/auth.store';
+import { AuthStore } from '../../shared/stores/auth.store';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
     RouterLink,
@@ -26,10 +26,10 @@ import { AuthStore } from './stores/auth.store';
   template: `
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title>Register</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" type="email" />
@@ -42,12 +42,12 @@ import { AuthStore } from './stores/auth.store';
             mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="!loginForm.valid || authStore.isLoading()"
+            [disabled]="!registerForm.valid || authStore.isLoading()"
           >
-            Login
+            Register
           </button>
         </form>
-        <p>Don't have an account? <a routerLink="/register">Register</a></p>
+        <p>Already have an account? <a routerLink="/login">Login</a></p>
         @if (authStore.hasError()) {
         <p style="color: red;">{{ authStore.error() }}</p>
         }
@@ -56,21 +56,21 @@ import { AuthStore } from './stores/auth.store';
   `,
   styles: [],
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class RegisterComponent {
+  registerForm: FormGroup;
   authStore = inject(AuthStore);
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    this.authStore.login(this.loginForm.value).subscribe({
+    this.authStore.register(this.registerForm.value).subscribe({
       next: () => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/login']);
       },
       error: () => {
         // Error handled in store

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TimeEntry } from './models/time-entry';
+import { TimeEntry } from '../../shared/models/time-entry';
 
 @Injectable({
   providedIn: 'root',

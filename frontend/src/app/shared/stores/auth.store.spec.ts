@@ -4,9 +4,9 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { AuthStore } from './auth.store';
-import { AuthService } from '../auth.service';
-import { App } from '../app';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { App } from '../../app';
+import { AuthService } from '../../core/services/auth.service';
 
 describe('AuthStore', () => {
   let store: InstanceType<typeof AuthStore>;

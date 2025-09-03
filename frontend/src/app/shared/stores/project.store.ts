@@ -6,9 +6,9 @@ import {
   patchState,
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ProjectService } from '../project.service';
 import { Project, Client, ProjectState } from '../models/project';
 import { tap, catchError, of } from 'rxjs';
+import { ProjectService } from '../../core/services/project.service';
 
 const initialState: ProjectState = {
   projects: [],

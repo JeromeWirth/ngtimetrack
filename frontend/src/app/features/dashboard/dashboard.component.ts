@@ -1,11 +1,9 @@
 import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthStore } from './stores/auth.store';
-import { TimeEntryStore } from './stores/time-entry.store';
-import { VacationStore } from './stores/vacation.store';
-import { UserStore } from './stores/user.store';
-import { TimeEntry } from './models/time-entry';
-import { User } from './models/user';
+import { AuthStore } from '../../shared/stores/auth.store';
+import { TimeEntryStore } from '../../shared/stores/time-entry.store';
+import { UserStore } from '../../shared/stores/user.store';
+import { VacationStore } from '../../shared/stores/vacation.store';
 
 @Component({
   selector: 'app-dashboard',

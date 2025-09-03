@@ -12,9 +12,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { TimeEntryStore } from './stores/time-entry.store';
-import { ProjectStore } from './stores/project.store';
-import { AuthStore } from './stores/auth.store';
+import { AuthStore } from '../../shared/stores/auth.store';
+import { ProjectStore } from '../../shared/stores/project.store';
+import { TimeEntryStore } from '../../shared/stores/time-entry.store';
 
 @Component({
   selector: 'app-time-entry',

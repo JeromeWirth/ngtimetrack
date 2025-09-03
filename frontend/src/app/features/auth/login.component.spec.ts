@@ -10,8 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LoginComponent } from './login.component';
-import { AuthStore } from './stores/auth.store';
-import { App } from './app';
+import { App } from '../../app';
+import { AuthStore } from '../../shared/stores/auth.store';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

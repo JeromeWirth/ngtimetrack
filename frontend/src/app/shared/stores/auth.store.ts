@@ -6,9 +6,9 @@ import {
   patchState,
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { User, AuthState } from '../models/user';
+import { AuthState } from '../models/user';
 import { tap, catchError, of } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
 
 const initialState: AuthState = {
   user: null,

@@ -6,9 +6,9 @@ import {
   patchState,
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { UserService } from '../user.service';
 import { User, UserState } from '../models/user';
 import { tap, catchError, of } from 'rxjs';
+import { UserService } from '../../core/services/user.service';
 
 const initialState: UserState = {
   users: [],

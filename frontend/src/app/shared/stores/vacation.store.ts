@@ -6,9 +6,9 @@ import {
   patchState,
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { VacationService } from '../vacation.service';
 import { VacationDay, VacationState } from '../models/vacation';
 import { tap, catchError, of } from 'rxjs';
+import { VacationService } from '../../core/services/vacation.service';
 
 const initialState: VacationState = {
   requests: [],

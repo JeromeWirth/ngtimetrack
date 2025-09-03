@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login.component';
-import { RegisterComponent } from './register.component';
-import { ClientsComponent } from './clients.component';
-import { DashboardComponent } from './dashboard.component';
-import { LayoutComponent } from './layout.component';
-import { ProjectsComponent } from './projects.component';
-import { TimeEntryComponent } from './time-entry.component';
-import { VacationsComponent } from './vacations.component';
+import { LoginComponent } from './features/auth/login.component';
+import { RegisterComponent } from './features/auth/register.component';
+import { LayoutComponent } from './shared/layout.component';
+import { ClientsComponent } from './features/clients/clients.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { ProjectsComponent } from './features/projects/projects.component';
+import { TimeEntryComponent } from './features/time-entry/time-entry.component';
+import { VacationsComponent } from './features/vacations/vacations.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },

@@ -6,9 +6,9 @@ import {
   patchState,
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { TimeEntryService } from '../time-entry.service';
 import { TimeEntry, TimeEntryState } from '../models/time-entry';
 import { tap, catchError, of } from 'rxjs';
+import { TimeEntryService } from '../../core/services/time-entry.service';
 
 const initialState: TimeEntryState = {
   entries: [],
