@@ -11,7 +11,6 @@ ngtimetrack/
 │
 ├── frontend/         # Angular 20 app (UI)
 ├── backend/          # Spring Boot app (API & DB)
-├── .ai/              # AI-generated docs, plans, and requirements
 ├── README.md         # Project overview and instructions
 └── ...               # Other root files (e.g., .gitignore, package.json)
 ```
@@ -76,7 +75,7 @@ cd ../backend
 ## Testing
 
 - Frontend: `npm test` (from `frontend/`)
-- Backend: `./gradlew test` or `./mvnw test` (from `backend/`)
+- Backend: `./gradlew test`
 - Minimum 70% code coverage required
 
 ---

@@ -24,40 +24,62 @@ import { ProjectStore } from '../../shared/stores/project.store';
     ReactiveFormsModule,
   ],
   template: `
-    <h1>Clients</h1>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Add Client</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-          <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name" />
-          </mat-form-field>
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="!clientForm.valid || projectStore.isLoading()"
+    <div class="max-w-3xl mx-auto px-4 py-6">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-gray-800">Clients</h1>
+      </div>
+
+      <mat-card class="mb-6">
+        <mat-card-header>
+          <mat-card-title class="text-lg font-medium"
+            >Add Client</mat-card-title
           >
-            Add Client
-          </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Existing Clients</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-list>
-          @for (client of projectStore.clients(); track client.id) {
-          <mat-list-item>{{ client.name }}</mat-list-item>
-          }
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+        </mat-card-header>
+        <mat-card-content>
+          <form
+            [formGroup]="clientForm"
+            (ngSubmit)="onSubmit()"
+            class="flex gap-3 items-end"
+          >
+            <mat-form-field class="flex-1">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+
+            <div>
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="!clientForm.valid || projectStore.isLoading()"
+                class="px-4 py-2 rounded bg-indigo-600 hover:bg-indigo-700 text-white"
+              >
+                Add Client
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class="text-lg font-medium"
+            >Existing Clients</mat-card-title
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <div class="space-y-2">
+            @for (client of projectStore.clients(); track client.id) {
+            <div
+              class="p-3 bg-gray-50 rounded flex items-center justify-between"
+            >
+              <div class="text-gray-800">{{ client.name }}</div>
+            </div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   `,
   styles: [],
 })
